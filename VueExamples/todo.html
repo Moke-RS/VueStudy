@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo app</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        * {
+            color: black;
+        }
+
+        .todo-text {
+            min-width: 100px;
+            display: inline-block;
+        }
+
+        .todo-remove:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="todo-app">
+        <h1>Todo App</h1>
+        <label for="todo-input">To Do:</label>
+        <input v-model="todoText" @keyup.enter="insertTodo" type="text" id="todo-input" placeholder="What do you want to do?">
+        <button type="submit" v-on:click="insertTodo">Insert</button>
+        <div class="todos">
+            <h2>To Do's</h2>
+            <span v-show="todos.length === 0">Nothing to do! Enjoy your day! :)</span>
+            <ol class="todo-list">
+                <li v-for="(todo, idx) in todos" v-bind:item="idx">
+                    <span class='todo-text'>{{ todo.text }}</span><a class='todo-remove' v-on:click="removeTodo(idx)">X</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+<script>
+    let todoApp = new Vue({
+        el: "#todo-app",
+        data: {
+            todos: [],
+            todoText: ''
+        },
+        methods: {
+            insertTodo: function () { 
+                if (this.todoText) {
+                    this.todos.push({ text: this.todoText });
+                    this.todoText = '';
+                }
+            },
+            removeTodo: function (index) {
+                if (index >= 0 && index < this.todos.length) {
+                    this.todos.splice(index, 1);
+                }
+            }
+        }
+    });
+</script>
+</html>
