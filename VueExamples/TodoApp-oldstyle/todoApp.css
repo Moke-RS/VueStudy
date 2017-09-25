@@ -1,0 +1,12 @@
+* {
+    color: black;
+}
+
+.todo-text {
+    min-width: 100px;
+    display: inline-block;
+}
+
+.todo-remove:hover {
+    cursor: pointer;
+}
