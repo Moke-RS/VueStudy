@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red
+        }
+        .black { 
+            color: black
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h1 :class='className' @mouseEnter='disableButton' @mouseLeave='enableButton'>Hello World</h1>
+        <button :title="title" @click="changeColor" :disabled='buttonDisabled'>Hover over me</button>
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#root',
+            data: {
+                title: 'Now the title is set through Javascript',
+                className: 'black',
+                buttonDisabled: false
+            },
+            methods: {
+                changeColor() {
+                    if (this.className === 'black')
+                        this.className = 'red'
+                    else
+                        this.className = 'black'
+                },
+                disableButton() {
+                    this.buttonDisabled = true
+                },
+                enableButton() {
+                    this.buttonDisabled = false
+                }
+            }
+        })
+    </script>
+</body>
+</html>
