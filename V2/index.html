@@ -17,7 +17,7 @@
 <body>
     <div id="root">
         <h1 :class='className' @mouseEnter='disableButton' @mouseLeave='enableButton'>Hello World</h1>
-        <button :title="title" @click="changeColor" :disabled='buttonDisabled'>Hover over me</button>
+        <button :title="title" @click="changeClass" :disabled='buttonDisabled'>Hover over me</button>
     </div>
     
     <script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
@@ -30,7 +30,7 @@
                 buttonDisabled: false
             },
             methods: {
-                changeColor() {
+                changeClass() {
                     if (this.className === 'black')
                         this.className = 'red'
                     else

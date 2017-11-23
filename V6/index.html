@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+</head>
+<body>
+    <div id="root">
+        <modal v-show="showModal" @close="showModal = false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsa consequatur mollitia molestias eligendi quibusdam id est provident iusto quod velit voluptatum error ratione temporibus, doloribus recusandae commodi cumque architecto.</modal>
+        <button @click="showModal = true">Show modal</button>
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

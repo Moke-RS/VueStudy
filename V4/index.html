@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2>All Tasks</h2>
+        <ul>
+            <li v-for="task in tasks">
+                <span style="max-width: 300px; display: inline-block">{{ task.description }}</span>
+                <a v-if="!task.completed" @click="completeTask(task)">Done</a>
+            </li>
+        </ul>
+
+        <h2>Incomplete Tasks</h2>
+        <ul>
+            <li v-for="task in incompleteTasks" v-text="task.description"></li>
+            <span v-show="incompleteTasks.length == 0">All tasks done!</span>
+        </ul>
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#root',
+            data: {
+                tasks: [
+                    { description: 'Go to the store', completed: true },
+                    { description: 'Get my clothes back from washhouse', completed: false },
+                    { description: 'Go to pilates', completed: false },
+                    { description: 'Learn Vue', completed: true },
+                    { description: 'Schedule maintenance', completed: false }
+                ]
+            },
+            computed: {
+                incompleteTasks() {
+                    return this.tasks.filter(task => !task.completed)
+                }
+            },
+            methods: {
+                completeTask(task) {
+                    task.completed = true;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
