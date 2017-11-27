@@ -57,17 +57,13 @@ Vue.component('grid', {
         cols: {  type: Number, required: true, default: 0}
     },
     methods: {
-        selectRange() {
-            if ( this.initialCell.row == -1 || this.initialCell.col == -1 ||
-                 this.lastCell.row == -1 || this.lastCell.col == -1) return
+        selectRange(initialCell, lastCell) {
+            if ( initialCell.row == -1 || initialCell.col == -1 ||
+                lastCell.row == -1 || lastCell.col == -1) return
             
-            let minRowVal, minColVal, maxRowVal, maxColVal = -1;
+            var range = this.getRange(initialCell, lastCell)
 
-            minRowVal = this.initialCell.row <= this.lastCell.row ? this.initialCell.row : this.lastCell.row;
-            maxRowVal = this.initialCell.row == minRowVal ? this.lastCell.row : this.initialCell.row;
-            
-            minColVal = this.initialCell.col <= this.lastCell.col ? this.initialCell.col : this.lastCell.col;
-            maxColVal = this.initialCell.col == minColVal ? this.lastCell.col : this.initialCell.col;
+            let { minRowVal, maxRowVal, minColVal, maxColVal } = range
 
             this.$children.forEach(cell => {
                 cell.isSelected = (cell.row >= minRowVal && cell.row <= maxRowVal && cell.col >= minColVal && cell.col <= maxColVal)
@@ -76,6 +72,17 @@ Vue.component('grid', {
                 cell.isBottomBorder = (cell.isSelected && cell.row == maxRowVal)
                 cell.isLeftBorder = (cell.isSelected && cell.col == minColVal)
             });
+        },
+        getRange(initialCell, lastCell) {
+            let minRowVal, minColVal, maxRowVal, maxColVal = -1;
+
+            minRowVal = this.initialCell.row <= this.lastCell.row ? this.initialCell.row : this.lastCell.row;
+            maxRowVal = this.initialCell.row == minRowVal ? this.lastCell.row : this.initialCell.row;
+            
+            minColVal = this.initialCell.col <= this.lastCell.col ? this.initialCell.col : this.lastCell.col;
+            maxColVal = this.initialCell.col == minColVal ? this.lastCell.col : this.initialCell.col;
+
+            return { minRowVal, maxRowVal, minColVal, maxColVal }
         },
         toggleMouseDown() {
             this.isMouseDown = !this.isMouseDown            
@@ -91,12 +98,12 @@ Vue.component('grid', {
                 this.lastCell = this.initialCell
             }
 
-            this.selectRange()
+            this.selectRange(this.initialCell, this.lastCell)
         })
 
         Event.$on('lastCellSelected', (cell) => {
             this.lastCell = { row: cell.row, col: cell.col }
-            this.selectRange()
+            this.selectRange(this.initialCell, this.lastCell)
         })
     }
 })
