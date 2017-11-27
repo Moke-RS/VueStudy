@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <style>
+        body { padding: 40px; }
+
+        td { 
+            border: 1px solid black;
+            min-width: 20px;
+            min-height: 20px;
+        }
+
+        td::before{
+            content: "\00a0";
+        }
+
+        td.upper-border { border-top: 3px solid green; }
+        td.right-border { border-right: 3px solid green; }
+        td.bottom-border { border-bottom: 3px solid green; }
+        td.left-border { border-left: 3px solid green; }
+
+        .selected {
+            background: yellow
+        }
+    </style>
+</head>
+<body>
+    <div id="root" class="container">
+        <grid :rows="10" :cols="10"></grid>
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

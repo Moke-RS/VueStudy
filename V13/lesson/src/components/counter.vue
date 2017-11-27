@@ -28,6 +28,7 @@ export default {
   methods: {
       getNextPost() {
           this.postNumber += 1
+          this.postMessage = "Fetching..."
 
           Axios
             .get(root + "/posts/" + this.postNumber)
